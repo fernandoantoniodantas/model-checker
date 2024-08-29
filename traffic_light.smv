@@ -27,7 +27,7 @@ ASSIGN
                     light = RED : GREEN;  -- Muda para verde ap�s o temporizador expirar
                     light = GREEN : RED;  -- Muda para vermelho ap�s o temporizador expirar
                 ESAC;
-            TRUE : light;  -- Mant�m o estado atual se o temporizador n�o tiver expirado
+            TRUE : light;  -- Mantem o estado atual se o temporizador n�o tiver expirado
         ESAC;
 
 -- Definindo as propriedades que queremos verificar
