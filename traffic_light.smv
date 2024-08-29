@@ -12,7 +12,7 @@ ASSIGN
     -- Inicializa o temporizador em 0
     init(timer) := 0;
 
-    -- Lï¿½gica do temporizador
+    -- Lóica do temporizador
     next(timer) := 
         CASE
             timer = 5 : 0;   -- Reseta o temporizador apï¿½s alcanï¿½ar o valor mï¿½ximo
