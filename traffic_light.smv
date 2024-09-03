@@ -1,21 +1,21 @@
 MODULE main
 VAR
     -- Definindo os estados das luzes
-    light : {RED, GREEN};  -- O semï¿½foro pode estar em um dos dois estados
+    light : {RED, GREEN};  -- O semaforo pode estar em um dos dois estados
 
-    -- Temporizador para controlar a duraï¿½ï¿½o do estado atual
+    -- Temporizador para controlar a duracao do estado atual
     timer : 0..5;  -- Temporizador vai de 0 a 5 (representando 6 estados)
 
 ASSIGN
-    -- Inicializa o semï¿½foro com a luz vermelha
+    -- Inicializa o semaforo com a luz vermelha
     init(light) := RED;
     -- Inicializa o temporizador em 0
     init(timer) := 0;
 
-    -- Lóica do temporizador
+    -- Loica do temporizador
     next(timer) := 
         CASE
-            timer = 5 : 0;   -- Reseta o temporizador apï¿½s alcanï¿½ar o valor mï¿½ximo
+            timer = 5 : 0;   -- Reseta o temporizador apos alcancar o valor maximo
             TRUE : timer + 1;  -- Incrementa o temporizador
         ESAC;
 
@@ -24,10 +24,10 @@ ASSIGN
         CASE
             timer = 5 : 
                 CASE
-                    light = RED : GREEN;  -- Muda para verde apï¿½s o temporizador expirar
-                    light = GREEN : RED;  -- Muda para vermelho apï¿½s o temporizador expirar
+                    light = RED : GREEN;  -- Muda para verde apos o temporizador expirar
+                    light = GREEN : RED;  -- Muda para vermelho apos o temporizador expirar
                 ESAC;
-            TRUE : light;  -- Mantem o estado atual se o temporizador nï¿½o tiver expirado
+            TRUE : light;  -- Mantem o estado atual se o temporizador nao tiver expirado
         ESAC;
 
 -- Definindo as propriedades que queremos verificar
