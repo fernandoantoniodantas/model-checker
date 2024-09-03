@@ -1,40 +1,39 @@
 MODULE main
 VAR
     -- Definindo os estados das luzes
-    light : {RED, GREEN};  -- O semaforo pode estar em um dos dois estados
+    light : {RED, GREEN};  -- O semáforo pode estar em um dos dois estados
 
-    -- Temporizador para controlar a duracao do estado atual
+    -- Temporizador para controlar a duração do estado atual
     timer : 0..5;  -- Temporizador vai de 0 a 5 (representando 6 estados)
 
 ASSIGN
-    -- Inicializa o semaforo com a luz vermelha
+    -- Inicializa o semáforo com a luz vermelha
     init(light) := RED;
     -- Inicializa o temporizador em 0
     init(timer) := 0;
 
-    -- Loica do temporizador
+    -- Lógica do temporizador
     next(timer) := 
         CASE
-            timer = 5 : 0;   -- Reseta o temporizador apos alcancar o valor maximo
+            timer = 5 : 0;   -- Reseta o temporizador após alcançar o valor máximo
             TRUE : timer + 1;  -- Incrementa o temporizador
         ESAC;
 
-    -- Logica do semaforo
+    -- Lógica do semáforo
     next(light) := 
         CASE
             timer = 5 : 
                 CASE
-                    light = RED : GREEN;  -- Muda para verde apos o temporizador expirar
-                    light = GREEN : RED;  -- Muda para vermelho apos o temporizador expirar
+                    light = RED : GREEN;  -- Muda para verde após o temporizador expirar
+                    light = GREEN : RED;  -- Muda para vermelho após o temporizador expirar
                 ESAC;
-            TRUE : light;  -- Mantem o estado atual se o temporizador nao tiver expirado
+            TRUE : light;  -- Mantém o estado atual se o temporizador não tiver expirado
         ESAC;
 
 -- Definindo as propriedades que queremos verificar
 SPEC
-    -- Propriedade: O semaforo deve eventualmente mudar para verde e depois para vermelho
-    AG (light = RED -> AX (light = GREEN))
+    -- Propriedade: O semáforo deve eventualmente mudar para verde e depois para vermelho
+    AG (light = RED -> AX (light = GREEN));
 
-    -- Propriedade: O semaforo sempre muda de verde para vermelho e vice-versa
-    AG (light = GREEN -> AX (light = RED))
-    --teste
+    -- Propriedade: O semáforo sempre muda de verde para vermelho e vice-versa
+    AG (light = GREEN -> AX (light = RED));
